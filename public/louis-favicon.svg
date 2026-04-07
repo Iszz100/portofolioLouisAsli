@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Louis Fachri Portofolio">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="55%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#8b5cf6" />
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#020617" />
+  <rect x="6" y="6" width="52" height="52" rx="12" fill="url(#bg)" />
+  <path d="M20 17h8v22h15v8H20V17Zm16 0h21v8H44v6h11v8H44v8h-8V17Z" fill="#e2e8f0" />
+</svg>
