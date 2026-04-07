@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  font-family: Inter, 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply m-0 min-w-[320px] bg-bg-primary text-slate-100;
+  background-image: radial-gradient(circle at 15% 15%, rgba(56, 189, 248, 0.16), transparent 28%),
+    radial-gradient(circle at 85% 12%, rgba(139, 92, 246, 0.14), transparent 30%),
+    radial-gradient(circle at 50% 100%, rgba(37, 99, 235, 0.14), transparent 36%);
+}
+
+* {
+  @apply box-border;
+}
+
+#root {
+  @apply relative overflow-x-clip;
+}
+
+.noise-texture {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.07) 0.6px, transparent 0.6px);
+  background-size: 3px 3px;
+}
+
+.container-shell {
+  @apply mx-auto w-full max-w-[1220px] px-4 sm:px-6 lg:px-10;
+}
+
+.section-padding {
+  @apply py-section;
+}
+
+.glass-panel {
+  @apply border border-slate-700/50 bg-slate-900/45 backdrop-blur-sm;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400 bg-clip-text text-transparent;
+}
+
+.focus-ring {
+  @apply outline-none focus-visible:ring-2 focus-visible:ring-cyan-300/80 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-primary;
+}
+
+.btn-premium {
+  @apply focus-ring relative isolate inline-flex items-center justify-center overflow-hidden rounded-xl border px-6 py-3 text-sm font-medium transition duration-300;
+}
+
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 0.8rem;
+  background: linear-gradient(110deg, rgba(34, 211, 238, 0.5), rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.45));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: -1;
+}
+
+.btn-premium:hover::before,
+.btn-premium:focus-visible::before {
+  opacity: 1;
+}
+
+.btn-glow {
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.35), 0 8px 24px rgba(37, 99, 235, 0.25);
+}
+
+.interactive-card {
+  @apply relative transition duration-300;
+}
+
+.interactive-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(125deg, rgba(34, 211, 238, 0.5), rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.45));
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.interactive-card:hover::after,
+.interactive-card:focus-within::after {
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .interactive-card::after {
+    opacity: 0.2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

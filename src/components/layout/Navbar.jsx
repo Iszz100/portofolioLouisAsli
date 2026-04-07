@@ -1,0 +1,106 @@
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { FaBars, FaXmark } from 'react-icons/fa6'
+import { Link, useLocation } from 'react-router-dom'
+import { navLinks, profile } from '../../data/profile'
+import CommandPalette from '../signature/CommandPalette'
+
+export default function Navbar() {
+  const location = useLocation()
+  const isHome = location.pathname === '/'
+  const [mobileOpen, setMobileOpen] = useState(false)
+
+  const toSectionHref = (id) => (isHome ? `#${id}` : `/#${id}`)
+
+  return (
+    <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-800/80 bg-bg-primary/70 backdrop-blur-md">
+      <div className="container-shell flex h-16 items-center justify-between gap-3">
+        <a href={toSectionHref('hero')} className="focus-ring text-sm font-semibold tracking-[0.16em] text-cyan-300">
+          LFPJ
+        </a>
+
+        <nav className="hidden items-center gap-6 lg:flex">
+          {navLinks.map((item) => (
+            <a
+              key={item.id}
+              href={toSectionHref(item.id)}
+              className="focus-ring text-sm text-slate-300 transition-colors duration-200 hover:text-cyan-200"
+            >
+              {item.label}
+            </a>
+          ))}
+          <Link to="/sertifikasi" className="focus-ring text-sm text-slate-300 transition-colors duration-200 hover:text-cyan-200">
+            Sertifikasi
+          </Link>
+        </nav>
+
+        <div className="hidden items-center gap-2 lg:flex">
+          <CommandPalette />
+          <motion.a
+            href={location.pathname === '/sertifikasi' ? '/' : toSectionHref('projects')}
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.98 }}
+            className="btn-premium btn-glow border-cyan-300/45 bg-cyan-400/10 px-4 py-2 text-xs font-medium tracking-wide text-cyan-200"
+          >
+            {location.pathname === '/sertifikasi' ? 'Kembali ke Beranda' : profile.roles[0]}
+          </motion.a>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setMobileOpen((prev) => !prev)}
+          className="focus-ring inline-flex h-10 w-10 items-center justify-center rounded-lg border border-slate-700 bg-slate-900/80 text-slate-200 transition hover:border-cyan-300/70 hover:text-cyan-200 lg:hidden"
+          aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-nav"
+        >
+          {mobileOpen ? <FaXmark size={20} /> : <FaBars size={18} />}
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {mobileOpen ? (
+          <motion.div
+            id="mobile-nav"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="border-t border-slate-800 bg-slate-950/95 px-4 pb-4 pt-3 backdrop-blur-md lg:hidden"
+          >
+            <nav className="flex flex-col gap-1">
+              {navLinks.map((item) => (
+                <a
+                  key={item.id}
+                  href={toSectionHref(item.id)}
+                  onClick={() => setMobileOpen(false)}
+                  className="focus-ring rounded-lg px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-800/80 hover:text-cyan-200"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <Link
+                to="/sertifikasi"
+                onClick={() => setMobileOpen(false)}
+                className="focus-ring rounded-lg px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-800/80 hover:text-cyan-200"
+              >
+                Sertifikasi
+              </Link>
+            </nav>
+
+            <div className="mt-3 flex items-center gap-2">
+              <CommandPalette />
+              <a
+                href={location.pathname === '/sertifikasi' ? '/' : toSectionHref('projects')}
+                onClick={() => setMobileOpen(false)}
+                className="focus-ring inline-flex rounded-lg border border-cyan-300/45 bg-cyan-400/10 px-3 py-2 text-xs font-medium tracking-wide text-cyan-200 transition hover:border-cyan-300/70"
+              >
+                Lihat Proyek
+              </a>
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </header>
+  )
+}
