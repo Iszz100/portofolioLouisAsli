@@ -10,16 +10,9 @@ export const domains = [
   {
     id: 'cybersecurity',
     title: 'Cybersecurity',
-    coreStrengths: [
-      'Linux hardening',
-      'Permission & access control',
-      'Web vulnerability dasar',
-      'Basic enumeration',
-      'Privilege escalation dasar',
-      'CTF practice',
-    ],
+    coreStrengths: ['CTF practice', 'CTF Cryptography', 'Digital Forensics'],
     context:
-      'Fokus saya di cybersecurity dasar adalah hardening Linux, kontrol akses, dan latihan CTF untuk membiasakan proses analisis saat menemukan celah.',
-    stack: ['Linux Hardening', 'Access Control', 'OWASP Basic Notes', 'TryHackMe / HackTheBox'],
+      'Fokus cybersecurity saya sekarang khusus di CTF, terutama role Cryptography dan Digital Forensics. Saya latihan bertahap untuk meningkatkan analisis pola, decoding, dan investigasi artefak digital.',
+    stack: ['CTF Platform', 'Cryptography Challenges', 'Digital Forensics Challenges', 'TryHackMe / HackTheBox'],
   },
 ]

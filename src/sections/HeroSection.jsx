@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { profile } from '../data/profile'
 import useResponsiveMotion from '../hooks/useResponsiveMotion'
 import cvFile from '../assets/CV Louis Fachri Putra Jatmiko.pdf'
-import profilePhoto from '../assets/foto_profil.jpeg'
+import profilePhoto from '../assets/foto_profil.webp'
 
 export default function HeroSection() {
   const { reduceMotion, isMobile } = useResponsiveMotion()
@@ -96,7 +96,8 @@ export default function HeroSection() {
               </a>
               <a
                 href={cvFile}
-                download="CV-Louis-Fachri-Putra-Jatmiko.pdf"
+                download="CV-Louis-Fachri-Putra-Jatmiko-Terbaru.pdf"
+                type="application/pdf"
                 className="btn-premium border-blue-300/50 bg-blue-400/10 text-blue-100 hover:-translate-y-[2px]"
               >
                 Download CV
