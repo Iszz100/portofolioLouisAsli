@@ -1,5 +1,4 @@
 ﻿import { useState } from 'react'
-import { motion } from 'framer-motion'
 import { profile } from '../data/profile'
 import useResponsiveMotion from '../hooks/useResponsiveMotion'
 import cvFile from '../assets/CV Louis Fachri Putra Jatmiko.pdf'
@@ -27,61 +26,31 @@ export default function HeroSection() {
       <div className="container-shell relative z-10 py-6 md:py-10">
         <div className="grid items-center gap-8 lg:grid-cols-12">
           <div className="lg:col-span-8">
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65 }}
-              className="mb-6 inline-flex items-center gap-3 rounded-full border border-slate-700/70 bg-slate-900/60 px-4 py-2"
-            >
+            <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-slate-700/70 bg-slate-900/60 px-4 py-2">
               <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.85)]" />
               <span className="text-[11px] uppercase tracking-[0.19em] text-slate-300">LFPJ • SISWA SMK SIJA</span>
-            </motion.div>
+            </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-              className="mb-4 text-xs uppercase tracking-[0.2em] text-cyan-300"
-            >
+            <p className="mb-4 text-xs uppercase tracking-[0.2em] text-cyan-300">
               Portofolio Siswa SIJA • {profile.location}
-            </motion.p>
+            </p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.08 }}
-              className="max-w-5xl text-hero font-semibold leading-[1.03]"
-            >
+            <h1 className="max-w-5xl text-hero font-semibold leading-[1.03]">
               <span className="block text-gradient">{profile.name}</span>
               <span className="mt-2 block text-[clamp(0.95rem,1.3vw,1.2rem)] font-medium uppercase tracking-[0.22em] text-slate-400">
                 SYSTEM ADMINISTRATOR • CYBERSECURITY
               </span>
-            </motion.h1>
+            </h1>
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-              className="mt-5 inline-flex max-w-full whitespace-normal rounded-full border border-blue-400/35 bg-blue-400/10 px-3 py-2 text-center text-xs text-blue-200 sm:px-4 sm:text-sm"
-            >
+            <div className="mt-5 inline-flex max-w-full whitespace-normal rounded-full border border-blue-400/35 bg-blue-400/10 px-3 py-2 text-center text-xs text-blue-200 sm:px-4 sm:text-sm">
               {profile.roles[0]}
-            </motion.div>
+            </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 0.2 }}
-              className="mt-7 max-w-2xl text-body leading-relaxed text-slate-300"
-            >
+            <p className="mt-7 max-w-2xl text-body leading-relaxed text-slate-300">
               {profile.shortPitch}
-            </motion.p>
+            </p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.3 }}
-              className="mt-10 flex flex-wrap gap-4 max-[767px]:flex-col"
-            >
+            <div className="mt-10 flex flex-wrap gap-4 max-[767px]:flex-col">
               <a
                 href="#projects"
                 className="btn-premium btn-glow border-cyan-300/55 bg-cyan-400/12 text-cyan-200 hover:-translate-y-[2px]"
@@ -102,20 +71,20 @@ export default function HeroSection() {
               >
                 Download CV
               </a>
-            </motion.div>
+            </div>
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 26 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.18 }}
-            className="mx-auto w-full max-w-[300px] lg:col-span-4 lg:max-w-[340px]"
-          >
+          <div className="mx-auto w-full max-w-[300px] lg:col-span-4 lg:max-w-[340px]">
             <div className="glass-panel overflow-hidden rounded-3xl p-2 shadow-card">
               <div className="overflow-hidden rounded-2xl">
                 <img
                   src={profilePhoto}
                   alt="Foto profil Louis"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
+                  width="585"
+                  height="708"
                   className="h-[300px] w-full origin-top object-cover object-[50%_24%] scale-[1.2] sm:h-[340px] sm:scale-[1.18] md:h-[390px] md:scale-[1.16]"
                 />
               </div>
@@ -123,21 +92,24 @@ export default function HeroSection() {
                 Foto profil
               </p>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      <motion.div
+      <div
         aria-hidden
-        animate={reduceMotion ? { x: 0, y: 0 } : { x: pointer.x, y: pointer.y }}
-        transition={{ type: 'spring', stiffness: 40, damping: 18 }}
-        className="pointer-events-none absolute right-[8%] top-[20%] h-52 w-52 rounded-full bg-cyan-400/18 blur-3xl"
+        style={{
+          transform: reduceMotion ? 'translate3d(0, 0, 0)' : `translate3d(${pointer.x}px, ${pointer.y}px, 0)`,
+        }}
+        className="pointer-events-none absolute right-[8%] top-[20%] h-52 w-52 rounded-full bg-cyan-400/18 blur-3xl transition-transform duration-300 ease-out"
       />
-      <motion.div
+      <div
         aria-hidden
-        animate={reduceMotion ? { x: 0, y: 0 } : { x: pointer.x * -0.55, y: pointer.y * -0.55 }}
-        transition={{ type: 'spring', stiffness: 34, damping: 20 }}
-        className="pointer-events-none absolute left-[15%] top-[14%] h-44 w-44 rounded-full bg-blue-500/14 blur-3xl"
+        style={{
+          transform:
+            reduceMotion ? 'translate3d(0, 0, 0)' : `translate3d(${pointer.x * -0.55}px, ${pointer.y * -0.55}px, 0)`,
+        }}
+        className="pointer-events-none absolute left-[15%] top-[14%] h-44 w-44 rounded-full bg-blue-500/14 blur-3xl transition-transform duration-300 ease-out"
       />
       <div
         aria-hidden

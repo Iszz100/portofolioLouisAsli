@@ -1,24 +1,33 @@
-import { useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { Suspense, lazy, useEffect, useState } from 'react'
 import { FaBars, FaXmark } from 'react-icons/fa6'
 import { Link, useLocation } from 'react-router-dom'
 import { navLinks, profile } from '../../data/profile'
-import CommandPalette from '../signature/CommandPalette'
 
-const MotionLink = motion(Link)
+const CommandPalette = lazy(() => import('../signature/CommandPalette'))
 
 export default function Navbar() {
   const location = useLocation()
   const isHome = location.pathname === '/'
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [showCommandPalette, setShowCommandPalette] = useState(false)
+
+  useEffect(() => {
+    if ('requestIdleCallback' in window) {
+      const idleId = window.requestIdleCallback(() => setShowCommandPalette(true), { timeout: 1200 })
+      return () => window.cancelIdleCallback(idleId)
+    }
+
+    const timeoutId = window.setTimeout(() => setShowCommandPalette(true), 900)
+    return () => window.clearTimeout(timeoutId)
+  }, [])
 
   const toSectionPath = (id) => `/#${id}`
 
   const handleSectionClick = (event, id, closeMenu = false) => {
     if (isHome) {
-      event.preventDefault()
       const target = document.getElementById(id)
       if (target) {
+        event.preventDefault()
         target.scrollIntoView({ behavior: 'smooth', block: 'start' })
       }
     }
@@ -56,20 +65,22 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 lg:flex">
-          <CommandPalette />
-          <MotionLink
+          {showCommandPalette ? (
+            <Suspense fallback={null}>
+              <CommandPalette />
+            </Suspense>
+          ) : null}
+          <Link
             to={location.pathname === '/sertifikasi' ? '/' : toSectionPath('projects')}
             onClick={
               location.pathname === '/sertifikasi'
                 ? undefined
                 : (event) => handleSectionClick(event, 'projects')
             }
-            whileHover={{ y: -2 }}
-            whileTap={{ scale: 0.98 }}
             className="btn-premium btn-glow border-cyan-300/45 bg-cyan-400/10 px-4 py-2 text-xs font-medium tracking-wide text-cyan-200"
           >
             {location.pathname === '/sertifikasi' ? 'Kembali ke Beranda' : profile.roles[0]}
-          </MotionLink>
+          </Link>
         </div>
 
         <button
@@ -84,16 +95,11 @@ export default function Navbar() {
         </button>
       </div>
 
-      <AnimatePresence>
-        {mobileOpen ? (
-          <motion.div
-            id="mobile-nav"
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="border-t border-slate-800 bg-slate-950/95 px-4 pb-4 pt-3 backdrop-blur-md lg:hidden"
-          >
+      {mobileOpen ? (
+        <div
+          id="mobile-nav"
+          className="border-t border-slate-800 bg-slate-950/95 px-4 pb-4 pt-3 backdrop-blur-md lg:hidden"
+        >
             <nav className="flex flex-col gap-1">
               {navLinks.map((item) => (
                 <Link
@@ -115,7 +121,11 @@ export default function Navbar() {
             </nav>
 
             <div className="mt-3 flex items-center gap-2">
-              <CommandPalette />
+              {showCommandPalette ? (
+                <Suspense fallback={null}>
+                  <CommandPalette />
+                </Suspense>
+              ) : null}
               <Link
                 to={toSectionPath('projects')}
                 onClick={(event) => handleSectionClick(event, 'projects', true)}
@@ -124,9 +134,8 @@ export default function Navbar() {
                 Lihat Proyek
               </Link>
             </div>
-          </motion.div>
-        ) : null}
-      </AnimatePresence>
+        </div>
+      ) : null}
     </header>
   )
 }

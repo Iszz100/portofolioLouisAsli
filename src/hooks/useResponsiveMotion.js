@@ -1,19 +1,30 @@
 import { useEffect, useState } from 'react'
-import { useReducedMotion } from 'framer-motion'
 
 const MOBILE_BREAKPOINT = 767
 
 export default function useResponsiveMotion() {
-  const prefersReducedMotion = useReducedMotion()
   const [isMobile, setIsMobile] = useState(() => window.innerWidth <= MOBILE_BREAKPOINT)
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() =>
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  )
 
   useEffect(() => {
+    const motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)')
+
     const onResize = () => {
       setIsMobile(window.innerWidth <= MOBILE_BREAKPOINT)
     }
+    const onMotionChange = (event) => {
+      setPrefersReducedMotion(event.matches)
+    }
 
     window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
+    motionMedia.addEventListener('change', onMotionChange)
+
+    return () => {
+      window.removeEventListener('resize', onResize)
+      motionMedia.removeEventListener('change', onMotionChange)
+    }
   }, [])
 
   return {

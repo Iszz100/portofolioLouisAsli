@@ -44,6 +44,8 @@ export default function CertificationsPage() {
                     src={certification.image}
                     alt={certification.title}
                     loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                     className="h-full w-full object-contain"
                   />
                 </div>

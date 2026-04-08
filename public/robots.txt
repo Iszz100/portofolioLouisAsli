@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://louisfachri.my.id/sitemap.xml

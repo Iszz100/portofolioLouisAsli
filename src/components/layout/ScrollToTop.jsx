@@ -16,12 +16,16 @@ export default function ScrollToTop() {
 
       if (scrollToHashTarget()) return
 
-      const raf = requestAnimationFrame(() => {
-        if (!scrollToHashTarget()) {
-          setTimeout(scrollToHashTarget, 120)
+      const start = performance.now()
+      const intervalId = setInterval(() => {
+        const reached = scrollToHashTarget()
+        const timedOut = performance.now() - start > 3000
+        if (reached || timedOut) {
+          clearInterval(intervalId)
         }
-      })
-      return () => cancelAnimationFrame(raf)
+      }, 90)
+
+      return () => clearInterval(intervalId)
     }
 
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })

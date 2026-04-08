@@ -43,6 +43,19 @@ body {
   @apply py-section;
 }
 
+.content-auto-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 920px;
+}
+
+.float-blob-a {
+  animation: floatBlobA 14s ease-in-out infinite;
+}
+
+.float-blob-b {
+  animation: floatBlobB 16s ease-in-out infinite;
+}
+
 .glass-panel {
   @apply border border-slate-700/50 bg-slate-900/45 backdrop-blur-sm;
 }
@@ -117,5 +130,25 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+@keyframes floatBlobA {
+  0%,
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  50% {
+    transform: translate3d(calc(-50% + 18px), -12px, 0);
+  }
+}
+
+@keyframes floatBlobB {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-14px, 10px, 0);
   }
 }

@@ -17,6 +17,8 @@ function ProjectGallery({ images, title }) {
           src={activeImage}
           alt={`${title} preview utama`}
           loading="lazy"
+          decoding="async"
+          fetchPriority="low"
           className="h-full w-full rounded-md object-contain"
         />
       </div>
@@ -37,6 +39,8 @@ function ProjectGallery({ images, title }) {
               src={imageSrc}
               alt={`${title} thumbnail ${index + 1}`}
               loading="lazy"
+              decoding="async"
+              fetchPriority="low"
               className="h-14 w-full rounded-sm object-cover md:h-16"
             />
           </button>
@@ -56,7 +60,7 @@ export default function ProjectsSection() {
   }, [activeCategory])
 
   return (
-    <section id="projects" className="section-padding">
+    <section className="section-padding">
       <div className="container-shell">
         <motion.div
           variants={sectionReveal}
@@ -114,6 +118,8 @@ export default function ProjectsSection() {
                     src={project.image}
                     alt={`${project.title} placeholder visual`}
                     loading="lazy"
+                    decoding="async"
+                    fetchPriority="low"
                     className="h-48 w-full object-cover md:h-56"
                   />
                 )}

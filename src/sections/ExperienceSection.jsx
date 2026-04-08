@@ -15,7 +15,7 @@ export default function ExperienceSection() {
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 28, mass: 0.25 })
 
   return (
-    <section id="experience" className="section-padding">
+    <section className="section-padding">
       <div className="container-shell">
         <motion.div
           variants={sectionReveal}

@@ -8,7 +8,7 @@ export default function CapabilitiesSection() {
   const { isMobile } = useResponsiveMotion()
 
   return (
-    <section id="capabilities" className="section-padding">
+    <section className="section-padding">
       <div className="container-shell">
         <motion.div
           variants={sectionReveal}

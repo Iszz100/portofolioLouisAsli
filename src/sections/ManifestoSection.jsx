@@ -5,7 +5,7 @@ import { sectionReveal } from '../utils/motion'
 
 export default function ManifestoSection() {
   return (
-    <section id="manifesto" className="section-padding">
+    <section className="section-padding">
       <div className="container-shell">
         <motion.div
           variants={sectionReveal}

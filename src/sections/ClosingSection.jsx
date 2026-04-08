@@ -4,7 +4,7 @@ import { sectionReveal } from '../utils/motion'
 
 export default function ClosingSection() {
   return (
-    <section id="contact" className="pb-10 pt-4 md:pb-14">
+    <section className="pb-10 pt-4 md:pb-14">
       <div className="container-shell">
         <motion.div
           variants={sectionReveal}
