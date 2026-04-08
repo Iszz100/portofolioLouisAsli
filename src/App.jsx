@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
+import ScrollToTop from './components/layout/ScrollToTop'
 import useResponsiveMotion from './hooks/useResponsiveMotion'
 import CertificationsPage from './pages/CertificationsPage'
 import HomePage from './pages/HomePage'
@@ -41,6 +42,7 @@ function App() {
       />
 
       <Navbar />
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<HomePage />} />

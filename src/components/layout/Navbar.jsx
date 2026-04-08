@@ -5,29 +5,50 @@ import { Link, useLocation } from 'react-router-dom'
 import { navLinks, profile } from '../../data/profile'
 import CommandPalette from '../signature/CommandPalette'
 
+const MotionLink = motion(Link)
+
 export default function Navbar() {
   const location = useLocation()
   const isHome = location.pathname === '/'
   const [mobileOpen, setMobileOpen] = useState(false)
 
-  const toSectionHref = (id) => (isHome ? `#${id}` : `/#${id}`)
+  const toSectionPath = (id) => `/#${id}`
+
+  const handleSectionClick = (event, id, closeMenu = false) => {
+    if (isHome) {
+      event.preventDefault()
+      const target = document.getElementById(id)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }
+
+    if (closeMenu) {
+      setMobileOpen(false)
+    }
+  }
 
   return (
     <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-800/80 bg-bg-primary/70 backdrop-blur-md">
       <div className="container-shell flex h-16 items-center justify-between gap-3">
-        <a href={toSectionHref('hero')} className="focus-ring text-sm font-semibold tracking-[0.16em] text-cyan-300">
+        <Link
+          to={toSectionPath('hero')}
+          onClick={(event) => handleSectionClick(event, 'hero')}
+          className="focus-ring text-sm font-semibold tracking-[0.16em] text-cyan-300"
+        >
           LFPJ
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-6 lg:flex">
           {navLinks.map((item) => (
-            <a
+            <Link
               key={item.id}
-              href={toSectionHref(item.id)}
+              to={toSectionPath(item.id)}
+              onClick={(event) => handleSectionClick(event, item.id)}
               className="focus-ring text-sm text-slate-300 transition-colors duration-200 hover:text-cyan-200"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
           <Link to="/sertifikasi" className="focus-ring text-sm text-slate-300 transition-colors duration-200 hover:text-cyan-200">
             Sertifikasi
@@ -36,14 +57,19 @@ export default function Navbar() {
 
         <div className="hidden items-center gap-2 lg:flex">
           <CommandPalette />
-          <motion.a
-            href={location.pathname === '/sertifikasi' ? '/' : toSectionHref('projects')}
+          <MotionLink
+            to={location.pathname === '/sertifikasi' ? '/' : toSectionPath('projects')}
+            onClick={
+              location.pathname === '/sertifikasi'
+                ? undefined
+                : (event) => handleSectionClick(event, 'projects')
+            }
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.98 }}
             className="btn-premium btn-glow border-cyan-300/45 bg-cyan-400/10 px-4 py-2 text-xs font-medium tracking-wide text-cyan-200"
           >
             {location.pathname === '/sertifikasi' ? 'Kembali ke Beranda' : profile.roles[0]}
-          </motion.a>
+          </MotionLink>
         </div>
 
         <button
@@ -70,14 +96,14 @@ export default function Navbar() {
           >
             <nav className="flex flex-col gap-1">
               {navLinks.map((item) => (
-                <a
+                <Link
                   key={item.id}
-                  href={toSectionHref(item.id)}
-                  onClick={() => setMobileOpen(false)}
+                  to={toSectionPath(item.id)}
+                  onClick={(event) => handleSectionClick(event, item.id, true)}
                   className="focus-ring rounded-lg px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-800/80 hover:text-cyan-200"
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
               <Link
                 to="/sertifikasi"
@@ -90,13 +116,13 @@ export default function Navbar() {
 
             <div className="mt-3 flex items-center gap-2">
               <CommandPalette />
-              <a
-                href={location.pathname === '/sertifikasi' ? '/' : toSectionHref('projects')}
-                onClick={() => setMobileOpen(false)}
+              <Link
+                to={toSectionPath('projects')}
+                onClick={(event) => handleSectionClick(event, 'projects', true)}
                 className="focus-ring inline-flex rounded-lg border border-cyan-300/45 bg-cyan-400/10 px-3 py-2 text-xs font-medium tracking-wide text-cyan-200 transition hover:border-cyan-300/70"
               >
                 Lihat Proyek
-              </a>
+              </Link>
             </div>
           </motion.div>
         ) : null}

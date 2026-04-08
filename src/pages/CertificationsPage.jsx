@@ -55,10 +55,18 @@ export default function CertificationsPage() {
                     <p className="mt-3 text-sm leading-relaxed text-slate-300">{certification.description}</p>
                   </div>
 
-                  <div className="grid gap-3 text-sm sm:grid-cols-1">
+                  <div className="grid gap-3 text-sm sm:grid-cols-2">
                     <div className="rounded-lg border border-slate-700 bg-slate-900/70 p-3">
                       <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">Penerbit</p>
                       <p className="mt-1 text-slate-200">{certification.issuer}</p>
+                    </div>
+                    <div className="rounded-lg border border-slate-700 bg-slate-900/70 p-3">
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">Tanggal Terbit</p>
+                      <p className="mt-1 text-slate-200">{certification.issueDate || '-'}</p>
+                    </div>
+                    <div className="rounded-lg border border-slate-700 bg-slate-900/70 p-3 sm:col-span-2">
+                      <p className="text-[11px] uppercase tracking-[0.16em] text-slate-400">Credential ID</p>
+                      <p className="mt-1 break-all text-slate-200">{certification.credentialId || '-'}</p>
                     </div>
                   </div>
 
