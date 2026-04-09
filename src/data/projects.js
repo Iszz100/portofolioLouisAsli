@@ -16,8 +16,18 @@ import cyberPhoto4 from '../assets/4.webp'
 import cyberPhoto5 from '../assets/5.webp'
 import cyberPhoto6 from '../assets/6.webp'
 import cyberPhoto7 from '../assets/7.webp'
+import iotAiDoc1 from '../assets/project_iot_ai_1.webp'
+import iotAiDoc2 from '../assets/project_iot_ai_2.webp'
+import iotAiDoc3 from '../assets/project_iot_ai_3.webp'
+import iotAiDoc4 from '../assets/project_iot_ai_4.webp'
+import iotAiDoc5 from '../assets/project_iot_ai_5.webp'
+import iotAiDoc6 from '../assets/project_iot_ai_6.webp'
+import iotAiDoc7 from '../assets/project_iot_ai_7.webp'
+import iotAiDoc8 from '../assets/project_iot_ai_8.webp'
+import iotAiDoc10 from '../assets/project_iot_ai_10.webp'
+import iotAiDoc11 from '../assets/project_iot_ai_11.webp'
 
-export const projectCategories = ['Semua', 'System Administrator', 'Cybersecurity']
+export const projectCategories = ['Semua', 'System Administrator', 'Cybersecurity', 'Lainnya']
 
 export const projects = [
   {
@@ -99,5 +109,38 @@ export const projects = [
     ],
     image: cyberPhoto7,
     images: [cyberPhoto0, cyberPhoto1, cyberPhoto2, cyberPhoto3, cyberPhoto4, cyberPhoto5, cyberPhoto6, cyberPhoto7],
+  },
+  {
+    id: 'p-4',
+    title: 'Smart Home IoT + AI - Dashboard Monitoring dan Kontrol (Flask)',
+    category: 'Lainnya',
+    problem:
+      'Tujuan belajar saya adalah membuat sistem Smart Home yang lebih praktis, efisien, dan terkontrol, supaya perangkat rumah bisa dipantau dan dikendalikan tanpa proses manual penuh.',
+    solution:
+      'Saya berperan di bagian pengembangan web dashboard menggunakan Flask untuk tampilan data IoT secara real-time. Dashboard ini menampilkan status sensor LDR, sensor gas MQ-135, aktuator servo, buzzer alarm, dan integrasi ESP32-CAM untuk face recognition sebagai verifikasi akses pintu.',
+    impact:
+      'Dari proyek ini saya belajar merancang alur sistem end-to-end: membaca data perangkat, menampilkan status ke dashboard, memberi respons terhadap kondisi tertentu, dan memastikan antarmuka mudah dipakai pengguna.',
+    impactMetric: 'Satu prototipe Smart Home terintegrasi yang bisa monitoring sensor dan kontrol akses pintu berbasis IoT + AI',
+    techStack: [
+      'Flask',
+      'Python',
+      'IoT Dashboard',
+      'ESP32-CAM',
+      'LDR Sensor',
+      'MQ-135',
+      'Servo',
+      'Buzzer',
+      'Face Recognition',
+    ],
+    role: 'Dashboard Developer (Flask) - IoT Interface',
+    engineeringNotes:
+      'Fokus kontribusi saya ada di sisi web: struktur halaman dashboard, tampilan status perangkat, dan alur interaksi monitoring agar data IoT mudah dibaca saat pengujian.',
+    architecturalDecisions: [
+      'Pisahkan layer pembacaan sensor dan layer tampilan dashboard agar debugging lebih cepat',
+      'Gunakan endpoint Flask terstruktur untuk update status perangkat secara konsisten',
+      'Rancang UI monitoring sederhana agar perubahan kondisi perangkat langsung terlihat',
+    ],
+    image: iotAiDoc3,
+    images: [iotAiDoc1, iotAiDoc2, iotAiDoc3, iotAiDoc4, iotAiDoc5, iotAiDoc6, iotAiDoc7, iotAiDoc8, iotAiDoc10, iotAiDoc11],
   },
 ]
