@@ -2,6 +2,10 @@ import fotoSysadmin1 from '../assets/fotoprojek_sysadmin1.webp'
 import fotoSysadmin2 from '../assets/fotoprojek_sysadmin2.webp'
 import fotoSysadmin3 from '../assets/fotoprojek_sysadmin3.webp'
 import fotoSysadmin4 from '../assets/fotoprojek_sysadmin4.webp'
+import projectSysadminDeploy1 from '../assets/projeksysadmin1.webp'
+import projectSysadminDeploy2 from '../assets/projeksysadmin2.webp'
+import projectSysadminDeploy3 from '../assets/projeksysadmin3.webp'
+import projectSysadminDeploy4 from '../assets/projeksysadmin4.webp'
 import berandaSekolah from '../assets/Beranda.webp'
 import profileSekolah from '../assets/Profile Sekolah.webp'
 import hubunganIndustri from '../assets/Hubungan Industri.webp'
@@ -77,6 +81,29 @@ export const projects = [
     repositoryUrl: 'https://github.com/Unauthorized-new-site',
     image: berandaSekolah,
     images: [berandaSekolah, profileSekolah, hubunganIndustri, digitalTalentProgram, ekstrakurikulerSekolah, profileJurusan],
+  },
+  {
+    id: 'p-5',
+    title: 'Website Swara Jatim - Deployment Ubuntu Server & Docker',
+    category: 'System Administrator',
+    problem:
+      'Tujuan belajar saya adalah menyiapkan hasil pengembangan website Swara Jatim agar bisa di-deploy dengan stabil di server Ubuntu dan tetap mudah dikelola saat update fitur.',
+    solution:
+      'Saya berperan di sisi deployment: menyiapkan environment Ubuntu Server, membungkus service web dengan Docker, menjalankan container untuk aplikasi, dan melakukan validasi akses halaman utama seperti Home, Galeri, Swara Jatim AI, dan Mini Game.',
+    impact:
+      'Saya belajar alur operasional deployment yang lebih rapi: dari setup server, build container, proses rilis, sampai pengecekan hasil publish agar website tetap konsisten dan siap dipakai user.',
+    impactMetric: 'Satu deployment website multi-halaman berjalan di Ubuntu Server dengan pendekatan container Docker',
+    techStack: ['Ubuntu Server', 'Docker', 'Linux Administration', 'Web Deployment', 'Service Validation', 'Troubleshooting'],
+    role: 'System Administrator - Deployment (Ubuntu & Docker)',
+    engineeringNotes:
+      'Fokus kontribusi saya di proyek ini ada pada kesiapan server dan stabilitas rilis layanan, bukan di desain UI.',
+    architecturalDecisions: [
+      'Gunakan Docker untuk standarisasi environment deploy agar lebih konsisten antar proses rilis',
+      'Lakukan pengecekan lintas halaman setelah deploy untuk memastikan semua endpoint frontend bisa diakses',
+      'Pisahkan tahap setup server, build image, dan verifikasi operasional supaya troubleshooting lebih cepat',
+    ],
+    image: projectSysadminDeploy1,
+    images: [projectSysadminDeploy1, projectSysadminDeploy2, projectSysadminDeploy3, projectSysadminDeploy4],
   },
   {
     id: 'p-2',

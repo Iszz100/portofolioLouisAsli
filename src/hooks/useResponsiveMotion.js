@@ -29,6 +29,7 @@ export default function useResponsiveMotion() {
 
   return {
     isMobile,
+    prefersReducedMotion: Boolean(prefersReducedMotion),
     reduceMotion: Boolean(prefersReducedMotion) || isMobile,
   }
 }
