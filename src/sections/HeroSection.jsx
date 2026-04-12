@@ -4,6 +4,9 @@ import { profile } from '../data/profile'
 import useResponsiveMotion from '../hooks/useResponsiveMotion'
 import cvFile from '../assets/CV Louis Fachri Putra Jatmiko.pdf'
 import profilePhoto from '../assets/foto_profil.webp'
+import profilePhoto360 from '../assets/foto_profil_360.webp'
+import profilePhoto540 from '../assets/foto_profil_540.webp'
+import profilePhoto720 from '../assets/foto_profil_720.webp'
 
 export default function HeroSection() {
   const { reduceMotion, isMobile, prefersReducedMotion } = useResponsiveMotion()
@@ -37,18 +40,15 @@ export default function HeroSection() {
   const subtitleMotion = shouldReduceAllMotion
     ? {}
     : {
-        initial: { opacity: 0, filter: 'blur(10px)' },
-        animate: {
-          opacity: [0, 1, useLiteMotion ? 0.62 : 0.52, 1],
-          filter: ['blur(10px)', 'blur(0px)', 'blur(0.6px)', 'blur(0px)'],
-        },
+        initial: { opacity: 0, y: 8 },
+        animate: { opacity: [0, 1, useLiteMotion ? 0.68 : 0.6, 1], y: [8, 0, 0, 0] },
         transition: {
           duration: useLiteMotion ? 5.4 : 7.2,
           times: [0, 0.16, 0.58, 1],
           ease: 'easeInOut',
           delay: 0.4,
-          repeat: Infinity,
-          repeatDelay: useLiteMotion ? 1.1 : 1.9,
+          repeat: useLiteMotion ? 0 : Infinity,
+          repeatDelay: 1.9,
         },
       }
 
@@ -112,7 +112,7 @@ export default function HeroSection() {
           y: {
             duration: useLiteMotion ? 8.5 : 6.5,
             ease: 'easeInOut',
-            repeat: Infinity,
+            repeat: useLiteMotion ? 0 : Infinity,
             repeatType: 'loop',
             delay: 1.25,
           },
@@ -153,12 +153,12 @@ export default function HeroSection() {
         animate={
           shouldReduceAllMotion
             ? { opacity: 0.86 }
-            : { opacity: [0.72, 0.92, 0.78], backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }
+            : { opacity: [0.72, 0.92, 0.78] }
         }
         transition={{
           duration: useLiteMotion ? 14 : 18,
           ease: 'easeInOut',
-          repeat: shouldReduceAllMotion ? 0 : Infinity,
+          repeat: shouldReduceAllMotion || useLiteMotion ? 0 : Infinity,
         }}
       />
       <div aria-hidden className="hero-ambient-glow" />
@@ -173,7 +173,7 @@ export default function HeroSection() {
         transition={{
           duration: useLiteMotion ? 12 : 16,
           ease: 'easeInOut',
-          repeat: shouldReduceAllMotion ? 0 : Infinity,
+          repeat: shouldReduceAllMotion || useLiteMotion ? 0 : Infinity,
         }}
       />
       <motion.div
@@ -187,7 +187,7 @@ export default function HeroSection() {
         transition={{
           duration: useLiteMotion ? 10 : 14,
           ease: 'easeInOut',
-          repeat: shouldReduceAllMotion ? 0 : Infinity,
+          repeat: shouldReduceAllMotion || useLiteMotion ? 0 : Infinity,
           delay: 0.8,
         }}
       />
@@ -295,9 +295,11 @@ export default function HeroSection() {
                 <div className="profile-image-wrap">
                   <img
                     src={profilePhoto}
+                    srcSet={`${profilePhoto360} 360w, ${profilePhoto540} 540w, ${profilePhoto720} 720w, ${profilePhoto} 1100w`}
+                    sizes="(max-width: 767px) 72vw, (max-width: 1024px) 42vw, 350px"
                     alt="Foto profil Louis"
-                    loading="eager"
-                    fetchPriority="high"
+                    loading="lazy"
+                    fetchPriority="low"
                     decoding="async"
                     width="585"
                     height="708"
